@@ -11,14 +11,25 @@ ol.bibliography li {
   margin-bottom: 1em;
 }
 
-ol.bibliography li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.2em;
-  width: 24px;
-  height: 24px;
-  background-image: url('/images/paper.png'); /* Adjust if your icon path differs */
-  background-size: contain;
-  background-repeat: no-repeat;
+.bib-entry {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.bib-icon {
+  flex: 0 0 auto;
+  width: 125px;
+  height: 125px;
+  margin-right: 16px;
+}
+
+.bib-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bib-text {
+  flex: 1;
 }

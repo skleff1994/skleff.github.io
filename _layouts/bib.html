@@ -4,7 +4,13 @@
 
 <div style="display: flex; align-items: flex-start; margin-bottom: 24px;">
   <!-- ICON -->
-  <img src="/images/paper.png" alt="icon" style="width: 24px; height: 24px; margin-right: 12px; margin-top: 4px;">
+{% assign icon_path = '/images/icons/' | append: entry.key | append: '.png' %}
+  <!-- <img src="{{ icon_path }}" alt="{{ entry.key }} icon" style="height: 125px; width: 125px; vertical-align: middle; margin-right: 8px;"> -->
+  <div class="bib-entry">
+    <div class="bib-icon">
+      <img src="{{ icon_path }}" alt="{{ entry.key }} icon">
+    </div>
+  </div>
 
   <!-- REFERENCE TEXT -->
   <div>
