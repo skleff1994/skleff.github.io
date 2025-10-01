@@ -1,0 +1,24 @@
+/* Remove numbering and show icon in bibliography */
+ol.bibliography {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ol.bibliography li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 1em;
+}
+
+ol.bibliography li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 24px;
+  height: 24px;
+  background-image: url('/images/paper.png'); /* Adjust if your icon path differs */
+  background-size: contain;
+  background-repeat: no-repeat;
+}
