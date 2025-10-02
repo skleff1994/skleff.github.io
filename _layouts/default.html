@@ -67,14 +67,37 @@ layout: compress
       document.addEventListener('DOMContentLoaded', function() {
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
         popoverTriggerList.forEach(function (popoverTriggerEl) {
-          new bootstrap.Popover(popoverTriggerEl, {
+          var popover = new bootstrap.Popover(popoverTriggerEl, {
             html: true,
             sanitize: false,
+            trigger: 'manual', // We'll control show/hide manually
             content: function() {
               var bibtex = popoverTriggerEl.getAttribute('data-bs-content');
               var bibId = 'bibtex-' + Math.random().toString(36).substr(2, 9);
               return `<pre id="${bibId}" style="white-space: pre-wrap;">${bibtex}</pre><button class='btn btn-primary copy-btn' onclick='navigator.clipboard.writeText(document.getElementById("${bibId}").innerText)'>Copy</button>`;
             }
+          });
+
+          var hideTimeout;
+          popoverTriggerEl.addEventListener('mouseenter', function() {
+            popover.show();
+            var popoverEl = document.querySelector('.popover');
+            if (popoverEl) {
+              popoverEl.addEventListener('mouseenter', function() {
+                clearTimeout(hideTimeout);
+              });
+              popoverEl.addEventListener('mouseleave', function() {
+                popover.hide();
+              });
+            }
+          });
+          popoverTriggerEl.addEventListener('mouseleave', function() {
+            hideTimeout = setTimeout(function() {
+              var popoverEl = document.querySelector('.popover');
+              if (popoverEl && !popoverEl.matches(':hover')) {
+                popover.hide();
+              }
+            }, 100);
           });
         });
       });

@@ -1,29 +1,29 @@
 ---
 ---
-<div class="container" style="max-width: 900px; margin: 0 auto; padding-left: 24px; padding-right: 24px;">
-
-<div style="display: flex; align-items: flex-start; margin-bottom: 24px;">
-  <!-- ICON -->
-{% assign icon_path = '/images/icons/' | append: entry.key | append: '.png' %}
-  <!-- <img src="{{ icon_path }}" alt="{{ entry.key }} icon" style="height: 125px; width: 125px; vertical-align: middle; margin-right: 8px;"> -->
-  <div class="bib-entry">
-    <div class="bib-icon">
-      <img src="{{ icon_path }}" alt="{{ entry.key }} icon">
-    </div>
+<div class="container" style="max-width: 900px; margin: 0 auto;">
+<!-- {% if forloop.first %}
+  <div class="alert alert-info" style="margin-bottom: 24px;">
+    <span style="font-size: 1.1em;">Authors marked with <strong>*</strong> contributed equally to this work.</span>
   </div>
+{% endif %} -->
 
-  <!-- REFERENCE TEXT -->
-  <div>
+<div class="bib-entry">
+  {% assign icon_path = '/images/icons/' | append: entry.key | append: '.png' %}
+  <div class="bib-icon">
+    <img src="{{ icon_path }}" alt="{{ entry.key }} icon">
+  </div>
+  <div class="bib-text">
     {%- for author in entry.author_array %}
-      {% assign full_name = author.first | append: " " | append: author.last %}
+      {% assign full_name = author.first | append: " " | append: author.last | remove: '*' %}
+      {% assign has_star = author.last contains '*' %}
       {% if full_name == "Sébastien Kleff" or full_name == "S{\'{e}}bastien Kleff" %}
-        <strong>{{author.first}} {{author.last}}</strong>,
+        <strong>{{author.first}} {{author.last | remove: '*'}}{% if has_star %}<sup>*</sup>{% endif %}</strong>,
       {% else %}
         {% assign first_name = author.first | split: " " %}
         {% for n in first_name %}
           {{n | truncate:1, ""}}.
         {% endfor %}
-        {{author.last}},
+        {{author.last | remove: '*'}}{% if has_star %}<sup>*</sup>{% endif %},
       {% endif %}
     {% endfor %}
 
@@ -57,9 +57,13 @@
       </button>
     {% endif %}
 
+    <a href="/publications/{{ entry.key }}.html" class="btn_bib btn btn-sm" style="text-decoration:none;">
+      Details
+    </a>
+
     {% if entry.url %}
       <a href="{{ entry.url }}">
-        <i class="bi bi-link-45deg" style="font-size: 1.5rem; color: #AA5042;"></i>
+        <i class="bi bi-link-45deg"></i>
       </a>
     {% endif %}
   </div>
