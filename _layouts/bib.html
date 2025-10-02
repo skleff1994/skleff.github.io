@@ -1,11 +1,27 @@
 ---
 ---
 <div class="container" style="max-width: 900px; margin: 0 auto;">
-<!-- {% if forloop.first %}
+
+<!-- 
+  {% if forloop.first %}
   <div class="alert alert-info" style="margin-bottom: 24px;">
     <span style="font-size: 1.1em;">Authors marked with <strong>*</strong> contributed equally to this work.</span>
   </div>
-{% endif %} -->
+  {% endif %} -->
+  {% assign show_star_legend = false %}
+  {% for entry in site.scholar.bibliography %}
+    {% for author in entry.author_array %}
+      {% if author.last contains '*' %}
+        {% assign show_star_legend = true %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {% if show_star_legend %}
+    <div class="alert alert-info" style="margin-bottom: 24px;">
+      <span style="font-size: 1.1em;">Authors marked with <strong>*</strong> contributed equally to this work.</span>
+    </div>
+  {% endif %}
 
 <div class="bib-entry">
   {% assign icon_path = '/images/icons/' | append: entry.key | append: '.png' %}
@@ -17,13 +33,13 @@
       {% assign full_name = author.first | append: " " | append: author.last | remove: '*' %}
       {% assign has_star = author.last contains '*' %}
       {% if full_name == "Sébastien Kleff" or full_name == "S{\'{e}}bastien Kleff" %}
-        <strong>{{author.first}} {{author.last | remove: '*'}}{% if has_star %}<sup>*</sup>{% endif %}</strong>,
+        <strong>{{author.first}} {{author.last | remove: '*'}}{% if author.last contains '*' %}<sup>*</sup>{% endif %}</strong>,
       {% else %}
         {% assign first_name = author.first | split: " " %}
         {% for n in first_name %}
           {{n | truncate:1, ""}}.
         {% endfor %}
-        {{author.last | remove: '*'}}{% if has_star %}<sup>*</sup>{% endif %},
+        {{author.last | remove: '*'}}{% if author.last contains '*' %}<sup>*</sup>{% endif %},
       {% endif %}
     {% endfor %}
 
@@ -57,9 +73,7 @@
       </button>
     {% endif %}
 
-    <a href="/publications/{{ entry.key }}.html" class="btn_bib btn btn-sm" style="text-decoration:none;">
-      Details
-    </a>
+    <a href="{{ '/' | append: entry.key | append: '.html' | relative_url }}" class="btn_bib btn btn-sm">Details</a>
 
     {% if entry.url %}
       <a href="{{ entry.url }}">

@@ -94,6 +94,15 @@ journal={IEEE International Conference on Robotics and Automation (ICRA)},
 year = {2021},
 abstract={Model Predictive Control (MPC) promises to endow robots with enough reactivity to perform complex tasks in dynamic environments by frequently updating their motion plan based on measurements. Despite its appeal, it has seldom been deployed on real machines because of scaling constraints. This paper presents the first hardware implementation of closed-loop nonlinear MPC on a 7-DoF torque-controlled robot. Our controller leverages a state-of-the art optimal control solver, namely Differential Dynamic Programming (DDP), in order to replan state and control trajectories at real-time rates (1kHz). In addition to this experimental proof of concept, an exhaustive performance analysis shows that our controller outperforms open-loop MPC on a rapid cyclic end-effector task. We also exhibit the importance of a sufficient preview horizon and full robot dynamics through comparisons with inverse dynamics and kinematic optimization.}
 }
+@article{KleffIROS22,
+author = {S{\'{e}}bastien Kleff and Dantec, Ewen and Saurel, Guilhem and Mansard, Nicolas and Righetti, Ludovic},
+title = {{Introducing Force Feedback in Model Predictive Control}},
+url = {https://hal.archives-ouvertes.fr/hal-03594295},
+journal = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+year = 2022,
+abstract={In the literature about model predictive control (MPC), contact forces are planned rather than controlled. In this paper, we propose a novel paradigm to incorporate effort measurements into a predictive controller, hence allowing to control them by direct measurement feedback. We first demonstrate why the classical optimal control formulation, based on position and velocity state feedback, cannot handle direct feedback on force information. Following previous approaches in force control, we then propose to augment the classical formulations with a model of the robot actuation, which naturally allows to generate online trajectories that adapt to sensed position, velocity and torques. We propose a complete implementation of this idea on the upper part of a real humanoid robot, and show through hardware experiments that this new formulation incorporating effort feedback outperforms classical MPC in challenging tasks where physical interaction with the environment is crucial.}
+}
+
 
 
 @article{KleffCCDC2018,
