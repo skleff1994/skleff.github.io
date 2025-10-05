@@ -13,7 +13,7 @@ nav_order: 5
 
 Our up-to-date publication list is also available on <a href="https://scholar.google.com/citations?user=yBs28hUAAAAJ&hl=en">Google Scholar</a>.
 
-<!-- <div class="bib_section" style="padding-top: 20px">
+<div class="bib_section" style="padding-top: 20px">
   {% bibliography -f all %}
-</div> -->
+</div>
 </div>
