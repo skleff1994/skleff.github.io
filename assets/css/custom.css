@@ -1,0 +1,35 @@
+/* Remove numbering and show icon in bibliography */
+ol.bibliography {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ol.bibliography li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 1em;
+}
+
+.bib-entry {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.bib-icon {
+  flex: 0 0 auto;
+  width: 125px;
+  height: 125px;
+  margin-right: 16px;
+}
+
+.bib-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bib-text {
+  flex: 1;
+}
