@@ -1,0 +1,40 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - main  # or 'master' if your default branch is master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./   # root of your repo
+
+    steps:
+      # 1. Checkout the repo
+      - uses: actions/checkout@v4
+
+      # 2. Setup exact Ruby version matching your local machine
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.3'
+          bundler-cache: true
+
+      # 3. Install all dependencies from Gemfile.lock
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+
+      # 4. Build Jekyll site exactly like locally
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --verbose
+
+      # 5. Deploy the generated _site to gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          keep_files: true
+          commit_message: "Deploy site via GitHub Actions"
