@@ -19,7 +19,7 @@ jobs:
       # 2. Setup exact Ruby version matching your local machine
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.3'
+          ruby-version: '3.3.4'
           bundler-cache: true
 
       # 3. Install all dependencies from Gemfile.lock
